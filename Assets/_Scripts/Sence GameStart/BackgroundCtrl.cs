@@ -7,6 +7,7 @@ public class BackgroundCtrl : MonoBehaviour
     private Vector2 offset;
     void Awake()
     {
+       
         scorllSpeed = 0.015f;
         material = GetComponent<Renderer>().material;
     }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class StarSpawner : MonoBehaviour
 {
+    public static StarSpawner Ins;
     [SerializeField] private GameObject preFabStar;
     [SerializeField] private int starNumber;
     Color[] starColors =
@@ -15,6 +16,15 @@ public class StarSpawner : MonoBehaviour
     };
     private void Awake()
     {
+        if (Ins == null)
+        {
+            Ins = this;
+            DontDestroyOnLoad(this);
+        }
+        else if (Ins)
+        {
+            Destroy(this);
+        }
         RandomStarNumber();
     }
     // Start is called before the first frame update

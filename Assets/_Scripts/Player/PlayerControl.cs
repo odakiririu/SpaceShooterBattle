@@ -10,15 +10,11 @@ public class PlayerControl : MonoBehaviour
     private Vector2 screenBounds;
     private float objectWidth;
     private float objectHeight;
-    public ExplosiveControl exCtrl;
-
 
     // Start is called before the first frame update
     void Start()
     {
-       // laserShootAudio = GetComponent<AudioClip>();
         moveSpeed = 5f;
-        transform.position =new Vector3(0, -2, 0);
         screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
         objectWidth = transform.GetComponent<SpriteRenderer>().bounds.size.x / 2;
         objectHeight = transform.GetComponent<SpriteRenderer>().bounds.size.y / 2;
@@ -65,10 +61,10 @@ public class PlayerControl : MonoBehaviour
         {
             GameManager.Ins.SubtractionLive();
             AudioManager.Ins.PlayMusic("audioPlayerHert");
-            if (GameManager.Ins.Lives == 0)
+            if (GameManager.Ins.lives == 0)
             {              
                 ExplosiveControl.Ins.PlayAniExplosive(prefabAniExplosive, transform.position);// set animation explosi
-                GameManager.Ins.HidePlayerShip();// hide ship player
+                Destroy(gameObject);
                 /// now i need change state game = end game
                 GameManager.Ins.SetGameManagerState(GameManager.GameState.GameOver);
             }

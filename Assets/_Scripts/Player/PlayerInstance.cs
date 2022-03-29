@@ -14,7 +14,6 @@ public class PlayerInstance : MonoBehaviour
         if (Ins == null)
         {
             Ins = this;
-            DontDestroyOnLoad(this);
         }
         else if (Ins)
         {

@@ -10,7 +10,6 @@ public class EnemySpawner : MonoBehaviour
         if (Ins == null)
         {
             Ins = this;
-            DontDestroyOnLoad(this);
         }
         else if (Ins)
         {
@@ -23,8 +22,8 @@ public class EnemySpawner : MonoBehaviour
     void SpawnEnemy()
     {
         // get postion top screen
-        Vector2 minScreen = ScreenSize.Ins.minScreen;
-        Vector2 maxScreen = ScreenSize.Ins.maxScreen;    
+        Vector2 minScreen = ScreenSize.Ins.minScreen ;
+        Vector2 maxScreen = ScreenSize.Ins.maxScreen ;    
 
         GameObject anEnemy = (GameObject)Instantiate(prefabEnemy);
         anEnemy.transform.position = new Vector2(Random.Range(minScreen.x, maxScreen.x), maxScreen.y);

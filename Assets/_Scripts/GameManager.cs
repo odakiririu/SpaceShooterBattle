@@ -1,6 +1,6 @@
 
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -16,16 +16,9 @@ public class GameManager : MonoBehaviour
 
     // khai bao bien de quan li
     public GameObject playerShip;
-    public int Score;
+    public int score;
     public int bestScore;
-    public int Lives;
-    [SerializeField] private Text txtScore;
-    [SerializeField] private Text txtBestScore;
-    [SerializeField] private Text txtLive;
-    [SerializeField] private Text txtLevelShip;
-    [SerializeField] private GameObject pnGameover;
-    [SerializeField] private GameObject pnUIGamePause;
-    [SerializeField] private GameObject pnUITutorial;
+    public int lives;
     public int levelShip;
 
 
@@ -34,23 +27,20 @@ public class GameManager : MonoBehaviour
         if (Ins == null)
         {
             Ins = this;
-            DontDestroyOnLoad(this);
         }
         else if (Ins)
         {
             Destroy(this);
         }
-        levelShip = 1;
+       
     }
     private void Start()
     {
+        playerShip = GameObject.Find("/Player");
         StartGamePlay();
         LoadScore();
-        Score = 0;
-        Lives = 3;
         gameState = GameState.Opening;
-        AudioManager.Ins.StartCoroutine("PlayMusicBG");
-        Invoke("DisablePanelUITutorial", 3.5f);
+        AudioManager.Ins.StartCoroutine("PlayMusicBG");       
     }
     void LoadScore()
     {
@@ -62,48 +52,45 @@ public class GameManager : MonoBehaviour
     }
     void SetBestScore()
     {
-        if(Score > bestScore)
+        if(score > bestScore)
         {
-            PlayerPrefs.SetInt("bestScore", Score);
+            PlayerPrefs.SetInt("bestScore", score);
         }
     }
     private void Update()
     {
-        UpdateUIPlayer();
         UpgradeLevelShip();
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             PauseGame();
         }
     }
-    void UpdateUIPlayer()
-    {
-        txtLive.text = Lives.ToString();
-        txtScore.text = Score.ToString();
-        txtLevelShip.text = levelShip.ToString();
-    }
+
     void SwitchGameState()
     {
         switch (gameState)
         {
             case GameState.Opening:
-                pnGameover.SetActive(false);
+                UIControl.Ins.SetPanelGameOver(false);
                 break;
             case GameState.Gameplay:
-                pnGameover.SetActive(false);
-                playerShip.SetActive(true);
+                score = 0;
+                lives = 3;
+                PlayerIns.Ins.InitPlayer();
+                UIControl.Ins.SetPanelGameOver(false);
+              //  playerShip.SetActive(true);
                 EnemySpawner.Ins.StarSpawnEnemy();
                 break;
             case GameState.GameOver:
                 EnemySpawner.Ins.StopSpawnEnemy();
                 SetBestScore();
-                pnGameover.SetActive(true);         
+                UIControl.Ins.SetPanelGameOver(true);
                 break;
         }
     }
     void UpgradeLevelShip()
     {
-        if (Score == 30)
+        if (score == 30)
         {
             levelShip = 2;
         }
@@ -115,15 +102,11 @@ public class GameManager : MonoBehaviour
     }
     public void IncreaseScore(int _score)
     {
-        Score += _score;
+        score += _score;
     }
     public void SubtractionLive()
     {
-        Lives -= 1;
-    }
-    public void HidePlayerShip()
-    {
-        playerShip.SetActive(false);
+        lives -= 1;
     }
     public void DestroyEnemyShip(GameObject gameObject)
     {
@@ -135,23 +118,26 @@ public class GameManager : MonoBehaviour
     {
         SetGameManagerState(GameState.Gameplay);
     }
-    public void ReloadNewGame()
+    public void ButtonRestart()
     {
-        SetGameManagerState(GameState.Opening);
+        SetGameManagerState(GameState.Gameplay);
     }
     public void PauseGame()
     {
         Time.timeScale = 0;
-        pnUIGamePause.SetActive(true);
+        UIControl.Ins.SetPanelGamePause(true);
     }
     public void ResumeGame()
     {
-
         Time.timeScale = 1;
-        pnUIGamePause.SetActive(false);
+        UIControl.Ins.SetPanelGamePause(false);
     }
-    private void DisablePanelUITutorial()
+    public void ButtonQuit()
     {
-        pnUITutorial.SetActive(false);
+        Application.Quit();
+    }
+    public void ButtonGoHome()
+    {
+        SceneManager.LoadScene("GameStart");
     }
 }

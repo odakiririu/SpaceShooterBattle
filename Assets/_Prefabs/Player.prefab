@@ -1,35 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6967805509358997463
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 300430242984045861}
-  m_Layer: 0
-  m_Name: Bullets
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &300430242984045861
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6967805509358997463}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 7106199837018333782}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7106199836118274236
 GameObject:
   m_ObjectHideFlags: 0
@@ -80,7 +50,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7106199837018333782
 Transform:
   m_ObjectHideFlags: 0
@@ -93,7 +63,6 @@ Transform:
   m_LocalScale: {x: 1.2, y: 1, z: 1}
   m_Children:
   - {fileID: 7106199836118274211}
-  - {fileID: 300430242984045861}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -181,7 +150,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabBulletPlayer: {fileID: 7668987943541314369, guid: ac822f8b2b74f2848bc521d21827d813, type: 3}
   insBulletPlayerPosition: {fileID: 7106199836118274236}
-  prefabAniExplosive: {fileID: 0}
+  prefabAniExplosive: {fileID: 5366176332319840028, guid: 66ba6e34abc4dc84ca2cc9aeb2b09427, type: 3}
+  prefabPlayer: {fileID: 0}
   moveSpeed: 5
   exCtrl: {fileID: 0}
 --- !u!61 &9073413783199681718
