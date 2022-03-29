@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class AudioManager : MonoBehaviour
 {
-	public static AudioManager Ins;
+    public static AudioManager Ins;
     private AudioSource audioSrc;
     private AudioSource audioSrcBackground;
     [SerializeField] private Slider sliderMusicBg;
