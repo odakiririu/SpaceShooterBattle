@@ -7,7 +7,7 @@ public class FirePatternt01 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("Fire", 4f, 0.1f);
+        InvokeRepeating("Fire", 0f, 0.05f);
     }
 
     // Update is called once per frame
@@ -26,6 +26,6 @@ public class FirePatternt01 : MonoBehaviour
         bul.transform.position = transform.position;
         bul.SetActive(true);
         bul.GetComponent<BulletMoment>().SetMoveDirection(bulDir);
-        angel += 10f;
+        angel += 3.6f;
     }
 }

@@ -4,24 +4,26 @@ using UnityEngine;
 
 public class FirePatternt02 : MonoBehaviour
 {
-    [SerializeField] private int bulletsAmount = 10;
-    public float startangle = 90f;
-    public float endangle = 270f;
+    [SerializeField] private int bulletsAmount = 30;
+    public float startAngle = 0f;
+    public float endAngle = 360;
+    public float timeLoop = 1f;
+    public float timeCall = 0f;
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("Fire", 0f, 2f);
+        InvokeRepeating("Fire", timeCall, timeLoop);
     }
     void Fire()
     {
-        float angleStep = (endangle - startangle) / bulletsAmount;
+        float angleStep = (endAngle - startAngle) / bulletsAmount;
         float angle = angleStep;
-        for (int i = 0; i < bulletsAmount + 1; i++)
+        for (int i = 0; i <= bulletsAmount + 1; i++)
         {
             float bulDirX = transform.position.x + Mathf.Sin((angle * Mathf.PI) / 180f);
             float bulDirY = transform.position.y + Mathf.Cos((angle * Mathf.PI) / 180f);
 
-            Vector3 bulMoveVector = new Vector3(bulDirX, bulDirY, 0);
+            Vector3 bulMoveVector = new Vector3(bulDirX,bulDirY, 0f);
             Vector2 bulDir = (bulMoveVector - transform.position).normalized;
 
             GameObject bul = BulletPool.Ins.GetBullet();
